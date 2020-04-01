@@ -51,6 +51,15 @@ export const routes: Routes = [
     },
     children: [
       {
+        path: 'login',
+        component: LoginComponent,
+        data: {
+          title: 'Login Page'
+        }
+      },
+   
+     
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },
