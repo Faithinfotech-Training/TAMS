@@ -1,0 +1,57 @@
+<div class="panel panel-primary">
+    <div class="panel-heading ">
+        <h2>Resource Info</h2><a [routerLink]="['../resourceadd']" class="btn btn-primary"
+            style="float: right;margin-bottom: 10px;">Create
+            Resource</a>
+    </div>
+    <select required #mySelect (change)='onOptionsSelected(mySelect.value)'>
+        <option value="">Choose Resource Type</option>
+        <option value="0">All</option>
+        <option *ngFor="let resMaster of resourcesInfo | async" value="{{resMaster.resourceType}}">
+            {{resMaster.resourceType}}
+        </option>
+    </select>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Resource Name </th>
+                    <th> Photo</th>
+                    <th> Capacity</th>
+                    <th> Systems</th>
+                    <th> Projector</th>
+                    <th> Rate</th>
+                    <th> Use</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let res of resources | async | paginate: { itemsPerPage: 4, currentPage: page }; let i=index">
+                    <td>{{res.resourceId}}</td>
+                    <td>{{res.resource.resourceType}}</td>
+                    <td><img class="zoom" src={{res.picturePath}}></td>
+                    <td align="center">{{res.resourceCapacity}}</td>
+                    <td align="center">{{res.noOfSystems}}</td>
+                    <td align="center">{{res.projector}}</td>
+                    <td>{{res.resourceRate}}</td>
+                    <td>{{res.typeOfUse}}</td>
+
+
+                    <td><button class="btn btn-info" (click)="editResource(res.resourceId)"
+                            style="margin-right: 10px">Edit Resource</button>
+                        <!--button class="btn btn-danger">Delete</button-->
+                        <!--button  class="btn btn-info"
+                            style="margin-left: 10px">Details</button-->
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <pagination-controls (pageChange)="page=($event)"></pagination-controls>
+    </div>
+    
+</div>

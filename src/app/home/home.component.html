@@ -1,0 +1,20 @@
+<!--h1>Resources Status</h1-->
+
+<ul >
+    <li *ngFor="let res of resources | async">
+        <div class="card" style="width: 18rem;">
+            <img src={{res.picturePath}} class="card-img-top smallimg" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{res.resource.resourceType}}</h5>
+                <p class="card-text">Rate (<i> per month</i> ) :<b> {{res.resourceRate}}</b> </p>
+                
+                <p *ngIf="res.typeOfUse==='Internal'"><span class="badge badge-dark">Internal Use</span></p>
+                <p *ngIf="res.typeOfUse==='External'"><span class="badge badge-danger">External Use</span></p>
+                <p *ngIf="res.typeOfUse==='Available'"><span class="badge badge-success">Available</span></p>
+                <hr>
+                <a (click)="viewResource(res.resourceId)" class="btn btn-primary">More Details...</a>
+            </div>
+        </div>
+         
+    </li>
+</ul>

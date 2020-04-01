@@ -1,0 +1,112 @@
+<div class="panel panel-primary">
+    <div class="panel-heading ">
+        <h2>Booking Form</h2>
+
+    </div>
+    <div class="panel-body">
+        <hr />
+
+        <h3>Resource Choosen: <span style="color:red;">{{res.resource.resourceType}}</span> </h3> 
+        <form [formGroup]="addBookingForm" novalidate (ngSubmit)="onSubmit()">
+
+            <!--RESOURCE ID HIDDEN-->
+            <div [formGroup]="addResourceForm">
+                <input type="hidden" formControlName="resourceId" />
+            </div>
+
+            <!-- CUSTOMER NAME -->
+            <div class="form-group">
+                <label class="col-md-4">Name</label>
+                <input type="text" class="form-control" required formControlName="custName" />
+            </div>
+            <div *ngIf="addBookingForm.controls['custName'].invalid && (addBookingForm.controls['custName'].dirty || addBookingForm.controls['custName'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="addBookingForm.controls['custName'].errors.required">
+                    Name is required.
+                </div>
+            </div>
+
+            <!-- CUSTOMER ADDRESS-->
+            <div class="form-group">
+                <label class="col-md-4">ADDRESS</label>
+                <input type="text" class="form-control" required formControlName="custAddress">
+            </div>
+            <div *ngIf="addBookingForm.controls['custAddress'].invalid && (addBookingForm.controls['custAddress'].dirty || addBookingForm.controls['custAddress'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="addBookingForm.controls['custAddress'].errors.required">
+                    Address is required.
+                </div>
+            </div>
+
+            <!-- Phone Number-->
+            <div class="form-group">
+                <label class="col-md-4">Phone Number</label>
+                <input type="text" class="form-control" required formControlName="phoneNumber">
+            </div>
+            <div *ngIf="addBookingForm.controls['phoneNumber'].invalid && (addBookingForm.controls['phoneNumber'].dirty || addBookingForm.controls['phoneNumber'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="addBookingForm.controls['phoneNumber'].errors.required">
+                    Phone Number is required.
+                </div>
+            </div>
+
+            <!-- EMAIL-->
+            <div class="form-group">
+                <label class="col-md-4">Email</label>
+                <input type="text" class="form-control" required formControlName="email">
+            </div>
+            <div *ngIf="addBookingForm.controls['email'].invalid && (addBookingForm.controls['email'].dirty || addBookingForm.controls['email'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="addBookingForm.controls['email'].errors.required">
+                    Email is required.
+                </div>
+            </div>
+
+            <!-- START DATE FROM-->
+            <div class="form-group">
+                <label class="col-md-4">Start Date</label>
+                <input type="date" class="form-control" required min="{{todate | date:'yyyy-MM-dd'}}"
+                    formControlName="startDate">
+            </div>
+            <div *ngIf="addBookingForm.controls['startDate'].invalid && (addBookingForm.controls['startDate'].dirty || addBookingForm.controls['startDate'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="addBookingForm.controls['startDate'].errors.required">
+                    Start Date is required.
+                </div>
+            </div>
+
+            <!-- END DATE TO-->
+            <div class="form-group">
+                <label class="col-md-4">END DATE</label>
+                <input type="date" class="form-control" required
+                    min="{{this.addBookingForm.controls.startDate.value | date:'yyyy-MM-dd'}}"
+                    formControlName="endDate">
+            </div>
+            <div *ngIf="addBookingForm.controls['endDate'].invalid && (addBookingForm.controls['endDate'].dirty || addBookingForm.controls['endDate'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="addBookingForm.controls['endDate'].errors.required">
+                    End Date is required.
+                </div>
+            </div>
+
+            <!-- PURPOSE-->
+            <div class="form-group">
+                <label class="col-md-4">PURPOSE</label>
+                <input type="textArea" class="form-control" required formControlName="purpose">
+            </div>
+            <div *ngIf="addBookingForm.controls['purpose'].invalid && (addBookingForm.controls['purpose'].dirty || addBookingForm.controls['purpose'].touched)"
+                class="alert alert-danger">
+                <div *ngIf="addBookingForm.controls['purpose'].errors.required">
+                    Purpose is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"
+                    [disabled]="addBookingForm.pristine || addBookingForm.invalid">
+                    Submit
+                </button>
+
+            </div>
+        </form>
+    </div>

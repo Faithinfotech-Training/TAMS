@@ -1,0 +1,8 @@
+@import 'src/assets/css/main.scss';
+@import 'src/assets/css/util.scss';
+
+.has-error input[type="text"],
+.has-error input[type="password"]{
+    border-color: red;
+    color: aqua;
+}

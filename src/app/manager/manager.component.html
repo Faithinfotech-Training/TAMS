@@ -1,0 +1,13 @@
+<header>
+    <div class="container">
+        <h5>Manager: {{userName}}</h5>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="#" routerLink="../viewreport">View Report</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" (click)="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<router-outlet></router-outlet>

@@ -1,1 +1,11 @@
+@import "../node_modules/ngx-toastr/toastr.css";
+
 /* You can add global styles to this file, and also import other style files */
+img{      
+    margin:6px 6px; 
+    width:160px;
+    height:125px;     
+    border: 4px solid rgb(224, 28, 28);      
+    box-shadow:rgb(224, 199, 199) 1px 1px 8px 1px;      
+    cursor: pointer;      
+} 

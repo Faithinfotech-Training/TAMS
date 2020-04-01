@@ -1,0 +1,160 @@
+<div class="panel panel-primary">
+    <div class="panel-heading ">
+        <h2>Create Resource</h2>
+
+    </div>
+    <div class="panel-body">
+        <hr />
+        <div [hidden]="submitted" style="width: 100%;">
+
+            <form [formGroup]="addResourceForm" novalidate (ngSubmit)="onSubmit()">
+
+                <!--div formGroupName="resource">
+                        <select formControlName="resourceTypeId" class="form-control" required>
+                                <option value="0" disabled>Choose Resource Type</option>
+                                <option *ngFor="let resMaster of resourceMaster" value="{{resMaster.resourceTypeId}}">
+                                    {{resMaster.resourceType}}
+                                </option>
+                        </select>
+
+                </div-->
+                <!-- RESOURCE TYPE-->
+
+                <div [formGroup]="addResourceType">
+                    <div class="form-group">
+                        <label class="control-label"> Resource Type </label>
+                        <select formControlName="resourceTypeId" class="form-control" required>
+                            <option value="" disabled>Choose Resource Type</option>
+                            <option *ngFor="let resMaster of resourceMaster | async"
+                                value="{{resMaster.resourceTypeId}}">
+                                {{resMaster.resourceType}}
+                            </option>
+                        </select>
+                    </div>
+                    <div *ngIf="addResourceType.controls['resourceTypeId'].invalid && (addResourceType.controls['resourceTypeId'].dirty || addResourceType.controls['resourceTypeId'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="addResourceType.controls['resourceTypeId'].errors.required">
+                            Resource Type is required.
+                        </div>
+                    </div>
+                </div>
+                <!-- RESOURCE CAPACITY-->
+                <div class="form-group">
+                    <label class="control-label">Resource Capacity</label>
+                    <input type="number" class="form-control" required formControlName="resourceCapacity"
+                        #resourceCapacity>
+                </div>
+                <div *ngIf="addResourceForm.controls['resourceCapacity'].invalid && (addResourceForm.controls['resourceCapacity'].dirty || addResourceForm.controls['resourceCapacity'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="addResourceForm.controls['resourceCapacity'].errors.required">
+                        Resource Capacity is required.
+                    </div>
+                </div>
+
+                <!-- RESOURCE noOfSystems-->
+                <div class="form-group">
+                    <label class="control-label">No. of System </label>
+                    <input type="number" class="form-control" required formControlName="noOfSystems" #noOfSystems>
+                </div>
+                <div *ngIf="addResourceForm.controls['noOfSystems'].invalid && (addResourceForm.controls['noOfSystems'].dirty || addResourceForm.controls['noOfSystems'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="addResourceForm.controls['noOfSystems'].errors.required">
+                        Number of System is required.
+                    </div>
+                </div>
+
+                <!-- RESOURCE Projector-->
+                <div class="form-group">
+                    <label class="control-label">Projector</label>
+                    <div class="form-control">
+                        <label class="radio-inline">
+                            <input type="radio" value="Y" name="projector" formControlName="projector" required> Available
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="N" name="projector" formControlName="projector" required> Not Available
+                        </label>
+                    </div>
+                </div>
+                <div *ngIf="addResourceForm.controls['projector'].invalid && (addResourceForm.controls['projector'].dirty || addResourceForm.controls['projector'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="addResourceForm.controls['projector'].errors.required">
+                        Projector availability is required.
+                    </div>
+                </div>
+
+                <!-- RESOURCE WhiteBoard-->
+                <div class="form-group">
+                    <label class="control-label">White Board</label>
+                    <div class="form-control">
+                        <label class="radio-inline">
+                            <input type="radio" value="Y" name="whiteBoard" formControlName="whiteBoard" required> Available
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="N" name="whiteBoard" formControlName="whiteBoard" required> Not Available
+                        </label>
+                    </div>
+                </div>
+                <div *ngIf="addResourceForm.controls['whiteBoard'].invalid && (addResourceForm.controls['whiteBoard'].dirty || addResourceForm.controls['whiteBoard'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="addResourceForm.controls['whiteBoard'].errors.required">
+                        White Board availability is required.
+                    </div>
+                </div>
+
+                <!-- TYPE OF USE-->
+                <!--div class="form-group">
+                    <label class="control-label"> Type Of Use </label>
+                    <select formControlName="typeOfUse" class="form-control" required>
+                        <option value="0" disabled>Choose Type of Use</option>
+                        <option *ngFor="let typeUse of typesofUse" value="{{typeUse.name}}">{{typeUse.name}}</option>
+                    </select>
+
+                </div>
+                <div *ngIf="addResourceForm.controls['typeOfUse'].invalid && (addResourceForm.controls['typeOfUse'].dirty || addResourceForm.controls['typeOfUse'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="addResourceForm.controls['typeOfUse'].errors.required">
+                        Type of Use is required.
+                    </div>
+                </div-->
+
+                <!-- RESOURCE Rate-->
+                <div class="form-group">
+                    <label class="control-label">Rate per Month </label>
+                    <input type="number" class="form-control" required formControlName="resourceRate" #resourceRate>
+                </div>
+                <div *ngIf="addResourceForm.controls['resourceRate'].invalid && (addResourceForm.controls['resourceRate'].dirty || addResourceForm.controls['resourceRate'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="addResourceForm.controls['resourceRate'].errors.required">
+                        Rate per month is required.
+                    </div>
+                </div>
+
+                <!-- RESOURCE Image-->
+                <div class="form-group">
+                    <label for="file">Choose File</label>
+                    <input type="file" id="file" name="image" (change)="handleFileInput($event.target.files)">
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="addResourceForm.pristine || addResourceForm.invalid"
+                        style="float: left;margin-bottom: 10px;">
+                        Save Resource
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!--div [hidden]="!submitted">
+            <h4>You submitted successfully!</h4>
+        </div-->
+    </div>
+    <div class="panel-footer">
+        <button (click)="backToResourceInfo()" class="btn btn-primary" style="float: right;margin-bottom: 10px;">Back to
+            Resource List</button>
+    </div>
+</div>
