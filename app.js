@@ -1,9 +1,3 @@
-const cheerio = require("cheerio");
-const axios = require("axios");
-const cases = {};
-const death = {};
-const recovered = {};
- 
 //Send Mail ---1
 const express = require("express");
 const cors = require("cors");
@@ -78,61 +72,6 @@ async function sendMail(user, callback) {
 }
 // Send mail---End 
 
-
-axios.get('https://www.worldometers.info/coronavirus/')
-    .then(function (response) {
-        let html = cheerio.load(response.data);
-        html(".maincounter-number").each((index, el) => {
-            if (index == 0) {
-                cases.totalcase = el.children[0].next.children[0].data;
-            }
-            if (index == 1) {
-                death.totalcase = el.children[0].next.children[0].data;
-            }
-            if (index == 2) {
-                recovered.totalcase = el.children[0].next.children[0].data;
-            }
-            console.log(el.children[0].next.children[0].data);
-        })
-
-    })
-    .catch(function (err) {
-        console.log('error')
-    })
-    .then(function () {
-        console.log('LOOKS LIKE COMPLETE');
-    });
-
-
-//1.
-var http = require('http');
-var fs = require('fs');
-//2.
-var server = http.createServer(function (req, resp) {
-    //3.
-    if (req.url === "/report") {
-        fs.readFile("index.html", function (error, pgResp) {
-            if (error) {
-                resp.writeHead(404);
-                resp.write('Contents you are looking are Not Found');
-            } else {
-                resp.writeHead(200, { 'Content-Type': 'text/html' });
-                resp.write(pgResp);
-                resp.write("Coronavirus Cases: <b>" + cases.totalcase + "</b><br/>");
-                resp.write("Death :  <b>" + death.totalcase + "</b><br/>");
-                resp.write("Recovered : <b>" + recovered.totalcase + "</b><br/>");
-
-            }
-
-            resp.end();
-        });
-    } else {
-        //4.
-        resp.writeHead(200, { 'Content-Type': 'text/html' });
-        resp.write('<h1>Corona Cases</h1><br /><br />To show please enter: ' + req.url);
-        resp.end();
-    }
-});
 //5.
 //server.listen(3000);
 //console.log('Server Started listening on 5050');
