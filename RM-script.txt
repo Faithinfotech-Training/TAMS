@@ -1,0 +1,19 @@
+------ROLE DETAILS------
+
+INSERT INTO role_details ( role_name) VALUES( 'manager');
+INSERT INTO role_details ( role_name) VALUES( 'admin');
+INSERT INTO role_details ( role_name) VALUES( 'superadmin');
+
+
+-------USER--------
+insert one superadmin using postman
+
+http://localhost:xxxx/register
+{
+	"userName": "superadmin",
+	"password": "admin123",
+	"roleDetails": {
+         	"roleId": 3
+     	}
+}  
+
